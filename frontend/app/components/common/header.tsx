@@ -26,7 +26,7 @@ const Header = ()=> {
       </div>
 
       <div className="flex items-center gap-2">
-        {theme === "dark" ? (
+        {theme === "light" ? (
           <Button variant="ghost" size="sm" onClick={() => toggleTheme()}>
             <Moon className="w-4 h-4" />
           </Button>

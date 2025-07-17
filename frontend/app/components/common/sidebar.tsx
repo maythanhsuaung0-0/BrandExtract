@@ -6,6 +6,7 @@ import {
   Square,
 } from "lucide-react"
 import { useTheme } from "../themeContext"
+import { cn } from "~/lib/utils"
 interface SidebarProps {
   setSelectedTool: (tool: string) => void
 }
@@ -24,7 +25,7 @@ const Sidebar = (props: SidebarProps)=> {
   ]
 
   return (
-    <div className={`w-16 bg-gray-800 text-white flex flex-col items-center py-4 space-y-4`}>
+    <div className={cn(`w-16 flex flex-col items-center py-4 space-y-4`,theme === "dark"? "bg-gray-800  text-white ":"bg-white text-gray-800")}>
       {sidebarItems.map((item) => (
         <button
           key={item.id}
