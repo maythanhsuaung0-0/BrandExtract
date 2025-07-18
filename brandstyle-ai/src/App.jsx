@@ -11,6 +11,7 @@ import { Tabs, Tab, TabPanel } from '@swc-react/tabs';
 import "./App.css";
 import UploadAssetPage from "./pages/upload-assets";
 import SuggestionPage from "./pages/suggestion";
+import Settings from "./pages/settings";
 
 const App = ({ addOnUISdk }) => {
 
@@ -32,7 +33,7 @@ const App = ({ addOnUISdk }) => {
             <SuggestionPage />
           </TabPanel>
           <TabPanel value="settings">
-            <p>Content for Settings tab goes here.</p>
+            <Settings />
           </TabPanel>
         </Tabs>
       </div>
