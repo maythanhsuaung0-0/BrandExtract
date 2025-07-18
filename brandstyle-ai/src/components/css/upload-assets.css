@@ -1,0 +1,100 @@
+@import url('./variables.css');
+@import url('./common.css');
+
+/* links */
+.url {
+  display: grid;
+  justify-items: center;
+}
+
+.upload-file {
+  position: relative;
+}
+
+.input-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.input-url {
+  border: 2px solid var(--light-gray);
+  padding: 0.5em 1em;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.drag-drop-area {
+  padding: 2em;
+  border: 2px dashed var(--light-gray);
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.drag-drop-area .btn{
+  margin: 0;
+}
+.dropping {
+  border: 2px dashed var(--light-blue);
+}
+
+.upload .span {
+  text-align: center;
+  padding: 0.7em 0;
+}
+
+.extracted-brand-dna {
+  margin-top: 2em;
+  padding: 1em;
+  background-color: var(--lightest-gray);
+  border-radius: 8px;
+}
+
+.extracted-brand-dna h3 {
+  font-size: 1.2em;
+}
+
+
+/* brand dna */
+.brand-dna-item {
+  margin-top: 1.2em;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.brand-dna-item span {
+  min-width: 3em;
+}
+
+.font span,
+.font div {
+  align-self: flex-start;
+}
+
+/* color */
+.color-list {
+  display: flex;
+  gap: 0.5em;
+}
+
+.color,
+.logo-image {
+  width: 2em;
+  height: 2em;
+  border-radius: 4px;
+  display: inline-block;
+
+}
+
+.logo-image {
+  background-color: gray;
+}

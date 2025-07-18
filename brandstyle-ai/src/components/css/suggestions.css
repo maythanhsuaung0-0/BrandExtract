@@ -1,0 +1,43 @@
+@import url('./common.css');
+@import url('./variables.css');
+
+.apply-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.suggestion-title {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  margin: 2em 0 1em;
+}
+
+.suggestion-title span {
+  font-size: 1.1em;
+}
+
+.suggestion{
+  border: 1px solid var(--lighter-gray);
+  border-radius: 8px;
+  padding: 0.5em 1em;
+}
+
+.suggestion-item{
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  align-items: center;
+
+}
+
+.suggestion-list {
+  display: grid;
+  gap: 1em;
+}
+
+.suggestion-item>div {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}

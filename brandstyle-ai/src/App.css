@@ -1,0 +1,11 @@
+.container {
+  margin: 1.5em 1em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+h2 {
+  display: block;
+  margin: 1em;
+}
