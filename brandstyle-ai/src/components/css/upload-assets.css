@@ -6,6 +6,12 @@
   display: grid;
   justify-items: center;
 }
+.url .btn{
+ margin-top: 0.5em;
+}
+.upload{
+ margin: 1.2em 0 2em;
+}
 
 .upload-file {
   position: relative;
@@ -28,6 +34,7 @@
   width: 100%;
   box-sizing: border-box;
   border-radius: 4px;
+  margin-top: 0.5em;
 }
 
 .drag-drop-area {
@@ -52,7 +59,6 @@
 }
 
 .extracted-brand-dna {
-  margin-top: 2em;
   padding: 1em;
   background-color: var(--lightest-gray);
   border-radius: 8px;

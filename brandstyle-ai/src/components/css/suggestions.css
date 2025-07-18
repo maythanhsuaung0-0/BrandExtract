@@ -1,9 +1,28 @@
 @import url('./common.css');
 @import url('./variables.css');
 
+.titles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.titles span {
+  text-align: center;
+  font-weight: 600;
+}
+
 .apply-btn {
   display: flex;
   justify-content: flex-end;
+  margin-top: 0.5em;
+}
+
+.suggestion-table {
+  border: 1px solid var(--lighter-gray);
+  border-radius: 8px;
+  padding: 1em;
 }
 
 .suggestion-title {
@@ -17,13 +36,13 @@
   font-size: 1.1em;
 }
 
-.suggestion{
+.suggestion {
   border: 1px solid var(--lighter-gray);
   border-radius: 8px;
   padding: 0.5em 1em;
 }
 
-.suggestion-item{
+.suggestion-item {
   display: flex;
   justify-content: space-between;
   gap: 1em;

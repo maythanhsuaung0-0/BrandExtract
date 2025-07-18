@@ -9,3 +9,9 @@ h2 {
   display: block;
   margin: 1em;
 }
+
+
+.tabs{
+  max-width: 320px;
+  overflow: hidden;
+  }

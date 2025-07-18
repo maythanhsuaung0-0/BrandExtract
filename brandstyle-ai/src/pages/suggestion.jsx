@@ -1,19 +1,76 @@
 import React from 'react';
-import { Palette,TypeOutline } from 'lucide-react';
+import { Palette, TypeOutline } from 'lucide-react';
 import '../components/css/suggestions.css';
 import SuggestionCard from '../components/suggestion-card.jsx';
 const SuggestionPage = () => {
   const colorSwapPairs = [
-    { current: 'Cyan', suggested: 'Blue' },
-    { current: 'Magenta', suggested: 'Pink' },
-    { current: 'Yellow', suggested: 'Lemon' },
-    { current: 'Black', suggested: 'Charcoal' }
+    {
+      current: {
+        name: 'Red',
+        hex: '#FF0000'
+      }
+      , suggested: {
+        name: 'Orange',
+        hex: '#FFA500'
+      }
+    },
+    {
+      current: {
+        name: 'Green',
+        hex: '#008000'
+      },
+      suggested: {
+        name: 'Lime',
+        hex: '#00FF00'
+      }
+    },
+    {
+      current: {
+        name: 'Blue',
+        hex: '#0000FF'
+      },
+      suggested: {
+        name: 'Cyan',
+        hex: '#00FFFF'
+      }
+    },
+    {
+      current: {
+        name: 'Purple',
+        hex: '#800080'
+      },
+      suggested: {
+        name: 'Violet',
+        hex: '#EE82EE'
+      }
+    }
   ];
   const fontSwapPairs = [
-    { current: 'Arial', suggested: 'Helvetica' },
-    { current: 'Times New Roman', suggested: 'Georgia' },
-    { current: 'Courier New', suggested: 'Monaco' },
-    { current: 'Verdana', suggested: 'Tahoma' }
+    {
+      current: {
+        name: 'Arial'
+      },
+      suggested: {
+        name: 'Helvetica'
+      }
+    }
+    ,
+    {
+      current: {
+        name: 'Times New Roman'
+      },
+      suggested: {
+        name: 'Georgia'
+      }
+    },
+    {
+      current: {
+        name: 'Courier New'
+      },
+      suggested: {
+        name: 'Consolas'
+      }
+    }
   ];
   return (
     <div className="container">
@@ -25,21 +82,27 @@ const SuggestionPage = () => {
           <h4 className='suggestion-title'>
             <Palette className='icon' />
             <span>Color Updates</span></h4>
-          <div className='suggestion-list'>
-            {colorSwapPairs.map((pair, index) => (
-              <SuggestionCard type={'color'} key={index} current={pair.current} suggested={pair.suggested} />
-            ))}
-
+          <div className='suggestion-table'>
+            <div className='titles'><span>Current</span> <span>Suggested</span></div>
+            <div className='suggestion-list'>
+              {colorSwapPairs.map((pair, index) => (
+                <SuggestionCard type={'color'} key={index} current={pair.current} suggested={pair.suggested} />
+              ))}
+            </div>
           </div>
         </div>
         <div >
           <h4 className='suggestion-title'>
             <TypeOutline className="icon" />
             <span>Font Updates</span></h4>
-          <div className='suggestion-list'>
-            {fontSwapPairs.map((pair, index) => (
-              <SuggestionCard type='font' key={index} current={pair.current} suggested={pair.suggested} />
-            ))}
+
+          <div className='suggestion-table'>
+            <div className='titles'><span>Current</span> <span>Suggested</span></div>
+            <div className='suggestion-list'>
+              {fontSwapPairs.map((pair, index) => (
+                <SuggestionCard type='font' key={index} current={pair.current} suggested={pair.suggested} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

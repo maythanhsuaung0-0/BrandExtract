@@ -9,12 +9,13 @@ const SuggestionCard = ({ type, current, suggested }) => {
       <div className='suggestion-item'>
         <div>
           {type === 'color' &&
-            <div style={{ backgroundColor: current.toLowerCase() }}
+            <div style={{ backgroundColor: current.hex }}
               className="color"></div>
           }
           <div className="current">
-            <div className='sub-title'>Current</div>
-            <div className='span'>{current}</div>
+            {type === "font" ? <div className='sub-title' style={{ fontFamily: current.name }}>{current.name}</div> :
+              <div className='sub-title'>{current.name}</div>}
+            <div className='span'>{type === "color" ? current.hex : current.name}</div>
           </div>
         </div>
         <div>
@@ -22,13 +23,15 @@ const SuggestionCard = ({ type, current, suggested }) => {
         </div>
         <div>
           {type === 'color' &&
-            <div style={{ backgroundColor: suggested.toLowerCase() }}
+            <div style={{ backgroundColor: suggested.hex }}
               className="color"></div>
           }
 
           <div className="suggested">
-            <div className='sub-title'>Current</div>
-            <div className='span'>{suggested}</div>
+            {type === "font" ? <div className='sub-title' style={{ fontFamily: suggested.name }}>{suggested.name}</div> :
+              <div className='sub-title'>{suggested.name}</div>}
+
+            <div className='span'>{type === "color" ? suggested.hex : suggested.name}</div>
           </div>
 
         </div>

@@ -12,7 +12,7 @@ const UploadAssetPage = () => {
     setUrl(event.target.value);
   }
   function handleClick() {
-  // use the url to do something, like fetching data or uploading
+    // use the url to do something, like fetching data or uploading
   }
   function handleDragOver(event) {
     event.preventDefault();
@@ -39,10 +39,16 @@ const UploadAssetPage = () => {
 
   return (
     <div className="container">
+      <h3 className='page-title'>Upload Asset Page</h3>
+      <p>Drop in a brand file or paste a URL, and we’ll bring its theme to life.</p>
+
+
       <div className='upload'>
         <div className='url'>
           <div>
-            <input type="text" id="url" placeholder="type your url" value={url} onChange={handleUrlChange} className='input-url' />
+            <label htmlFor="url" className='label'>Enter a URL</label>
+            <input type="text" id="url" placeholder="type your url" value={url} onChange={handleUrlChange} 
+    className='input-url' />
           </div>
           <Button className='btn' size="m" onClick={handleClick}>
             Enter URL

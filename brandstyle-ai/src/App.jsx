@@ -7,10 +7,12 @@ import "@spectrum-web-components/theme/express/theme-light.js";
 // https://opensource.adobe.com/spectrum-web-components/using-swc-react/
 import { Theme } from "@swc-react/theme";
 import React, { useState } from "react";
-import { Tabs, Tab, TabPanel } from '@swc-react/tabs';
+import { Tabs, Tab, TabPanel, TabsOverflow } from '@swc-react/tabs';
 import "./App.css";
 import UploadAssetPage from "./pages/upload-assets";
 import SuggestionPage from "./pages/suggestion";
+import VideoTools from "./pages/video-tools";
+import Templates from "./pages/templates";
 import Settings from "./pages/settings";
 
 const App = ({ addOnUISdk }) => {
@@ -20,23 +22,34 @@ const App = ({ addOnUISdk }) => {
     // Please note that the below "<Theme>" component does not react to theme changes in Express.
     // You may use "addOnUISdk.app.ui.theme" to get the current theme and react accordingly.
     <Theme system="express" scale="medium" color="light">
-      <div>
-        <Tabs selected="upload-assets">
-          <Tab label="Upload Assets" value="upload-assets"></Tab>
-          <Tab label="Suggestions" value="suggestion" id="suggestion"></Tab>
-          <Tab label="settings" value="settings" id="settings"></Tab>
-          <TabPanel value="upload-assets">
+    <div className="tabs">
+    <TabsOverflow>
+          <Tabs selected="upload-assets">
+            <Tab label="Upload Assets" value="upload-assets"></Tab>
+            <Tab label="Suggestions" value="suggestion" id="suggestion"></Tab>
+            <Tab label="settings" value="settings" id="settings"></Tab>
+            <Tab label="video" value="video" id="video"></Tab>
+            <Tab label="templates" value="templates" id="templates"></Tab>
+            <TabPanel value="upload-assets">
 
-            <UploadAssetPage />
-          </TabPanel>
-          <TabPanel value="suggestion">
-            <SuggestionPage />
-          </TabPanel>
-          <TabPanel value="settings">
-            <Settings />
-          </TabPanel>
-        </Tabs>
-      </div>
+              <UploadAssetPage />
+            </TabPanel>
+            <TabPanel value="suggestion">
+              <SuggestionPage />
+            </TabPanel>
+            <TabPanel value="settings">
+              <Settings />
+            </TabPanel>
+            <TabPanel value="video">
+              <VideoTools />
+            </TabPanel>
+            <TabPanel value="templates">
+              <Templates />
+            </TabPanel>
+
+          </Tabs>
+    </TabsOverflow>
+    </div>
     </Theme>
   );
 };
