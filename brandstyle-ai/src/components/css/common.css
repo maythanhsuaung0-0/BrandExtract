@@ -1,0 +1,45 @@
+h2,
+h3,
+h4,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  width: fit-content;
+  margin: .3em 0;
+}
+
+.sub-title{
+  font-weight: 600;
+}
+
+.span{
+  display: block;
+  color: var(--dark-gray);
+}
+/* icons */
+.icon{
+  width: 1em;
+  height: 1em;
+}
+.container {
+  margin: 1.5em 1em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.page-title{
+ margin-bottom:0.7em;
+}
+
+.color,
+.logo-image {
+  width: 2em;
+  height: 2em;
+  border-radius: 4px;
+  display: inline-block;
+
+}

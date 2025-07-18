@@ -1,0 +1,21 @@
+{
+    "testId": "cf7be068-0de4-4af9-956f-ce696e36fd5a",
+    "name": "Brandstyle Ai",
+    "version": "1.0.0",
+    "manifestVersion": 2,
+    "requirements": {
+        "apps": [
+            {
+                "name": "Express",
+                "apiVersion": 1
+            }
+        ]
+    },
+    "entryPoints": [
+        {
+            "type": "panel",
+            "id": "panel1",
+            "main": "index.html"
+        }
+    ]
+}
