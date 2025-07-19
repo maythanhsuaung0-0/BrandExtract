@@ -57,7 +57,7 @@ async def extract_brand_dna(
             logo_path = extract_logo_dispatch(tmp_path)
             logo_url = None
             if logo_path:
-                # TODO: You might want to upload to CDN, here just return file name
+                # TODO: might want to upload to CDN, here just return file name
                 logo_url = f"/static/{logo_path}"  # adjust as needed for your CDN/static
         finally:
             os.remove(tmp_path)
@@ -82,7 +82,6 @@ async def style_transfer(
     """
     Apply neural style transfer to a template using a brand's DNA.
     """
-    # --- Your logic here ---
     # For now, mock
     asset_url = f"https://cdn.example.com/generated/{req.template_id}_on_brand.png"
     summary = "Applied your brand palette and fonts to the template."
