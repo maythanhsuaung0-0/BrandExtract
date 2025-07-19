@@ -4,7 +4,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8000/api/auth";
 
 // Login expects form-encoded, with username (not email) & password
-export async function login({ email, password }: { email: string, password: string }) {
+export async function login({ email, password }) {
   const params = new URLSearchParams();
   params.append("username", email);  // FastAPI expects `username` not `email`
   params.append("password", password);
@@ -15,7 +15,7 @@ export async function login({ email, password }: { email: string, password: stri
 }
 
 // Register expects a JSON body { email, password }
-export async function register({ email, password }: { email: string, password: string }) {
+export async function register({ email, password }) {
   const res = await axios.post(`${API_URL}/register`, { email, password });
   return res.data; // includes message, user_id, email
 }
