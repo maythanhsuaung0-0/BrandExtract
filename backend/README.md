@@ -136,6 +136,3 @@ Handles all CRUD (Create, Read, Update, Delete) operations for user brands. All 
 #### **3.5 Delete a Brand**
 * **Endpoint:** `DELETE /api/brands/{brand_id}`
 * **Success Response (204 No Content):** Returns an empty response.
-
-### How to run**
-To get the backend running, first create and activate a Python virtual environment using `python -m venv .venv` followed by `source .venv/Scripts/activate`. Once your environment is active, install all required packages with `pip install -r requirements.txt`. Finally, start the development server by running `uvicorn main:app --reload`, which will make the API available at `http://127.0.0.1:8000`.
