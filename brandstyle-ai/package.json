@@ -21,13 +21,17 @@
         "@swc-react/button": "1.0.3",
         "@swc-react/dropzone": "^1.7.0",
         "@swc-react/field-label": "^1.7.0",
+        "@swc-react/overlay": "^1.7.0",
+        "@swc-react/popover": "^1.7.0",
         "@swc-react/tabs": "^1.7.0",
         "@swc-react/textfield": "^1.7.0",
         "@swc-react/theme": "^1.0.3",
         "axios": "^1.10.0",
         "lucide-react": "^0.525.0",
         "react": "18.2.0",
-        "react-dom": "18.2.0"
+        "react-dom": "18.2.0",
+        "react-hook-form": "^7.60.0",
+        "react-toastify": "^11.0.5"
     },
     "devDependencies": {
         "@adobe/ccweb-add-on-scripts": "^3.0.0",
@@ -46,5 +50,7 @@
         "tailwindcss": "^4.1.11",
         "webpack": "5.98.0",
         "webpack-cli": "6.0.1"
-    }
+    },
+"proxy":"http://localhost:8000"
+
 }
