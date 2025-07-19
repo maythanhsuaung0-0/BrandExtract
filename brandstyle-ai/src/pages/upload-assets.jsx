@@ -47,8 +47,8 @@ const UploadAssetPage = () => {
         <div className='url'>
           <div>
             <label htmlFor="url" className='label'>Enter a URL</label>
-            <input type="text" id="url" placeholder="type your url" value={url} onChange={handleUrlChange} 
-    className='input-url' />
+            <input type="text" id="url" placeholder="type your url" value={url} onChange={handleUrlChange}
+              className='input-url' />
           </div>
           <Button className='btn' size="m" onClick={handleClick}>
             Enter URL

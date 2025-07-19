@@ -1,2 +1,25 @@
 @import url('./common.css');
 @import url('./variables.css');
+
+.video-card {
+  margin: 1.2em 0;
+  background-color: var(--lightest-gray);
+  border-radius: 8px;
+  padding: 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--lighter-gray);
+}
+
+.video-card>span {
+  color: var(--dark-gray);
+  text-transform: uppercase;
+}
+
+#intro-outtro {
+  margin: 1em 0;
+  width: 100%;
+  padding: 0.5em;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid var(--lighter-gray);
+}

@@ -13,7 +13,7 @@ import UploadAssetPage from "./pages/upload-assets";
 import SuggestionPage from "./pages/suggestion";
 import VideoTools from "./pages/video-tools";
 import Templates from "./pages/templates";
-import Settings from "./pages/settings";
+import CreateBrand from "./pages/create-brand";
 
 const App = ({ addOnUISdk }) => {
 
@@ -27,7 +27,7 @@ const App = ({ addOnUISdk }) => {
           <Tabs selected="upload-assets">
             <Tab label="Upload Assets" value="upload-assets"></Tab>
             <Tab label="Suggestions" value="suggestion" id="suggestion"></Tab>
-            <Tab label="settings" value="settings" id="settings"></Tab>
+            <Tab label="Brandify" value="create-brand" id="create-brand"></Tab>
             <Tab label="video" value="video" id="video"></Tab>
             <Tab label="templates" value="templates" id="templates"></Tab>
             <TabPanel value="upload-assets">
@@ -37,8 +37,8 @@ const App = ({ addOnUISdk }) => {
             <TabPanel value="suggestion">
               <SuggestionPage />
             </TabPanel>
-            <TabPanel value="settings">
-              <Settings />
+            <TabPanel value="create-brand">
+              <CreateBrand/>
             </TabPanel>
             <TabPanel value="video">
               <VideoTools />
