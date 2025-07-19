@@ -136,3 +136,49 @@ Handles all CRUD (Create, Read, Update, Delete) operations for user brands. All 
 #### **3.5 Delete a Brand**
 * **Endpoint:** `DELETE /api/brands/{brand_id}`
 * **Success Response (204 No Content):** Returns an empty response.
+
+#### **4. Start the Application**
+
+To run the backend server, follow these steps:
+
+1. **Navigate to the Backend Directory**
+
+   ```bash
+   cd backend
+   ```
+
+2. **Create a Virtual Environment**
+
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activate the Virtual Environment**
+
+   * **On macOS/Linux:**
+
+     ```bash
+     source venv/bin/activate
+     ```
+   * **On Windows (Command Prompt):**
+
+     ```bash
+     venv\Scripts\activate
+     ```
+   * **On Windows (Git Bash):**
+
+     ```bash
+     source venv/Scripts/activate
+     ```
+
+4. **Install Dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Start the Backend Server**
+
+   ```bash
+   uvicorn main:app --reload
+   ```
