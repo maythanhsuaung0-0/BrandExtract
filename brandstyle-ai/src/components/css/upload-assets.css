@@ -17,16 +17,7 @@
   position: relative;
 }
 
-.input-file {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 1;
-  cursor: pointer;
-}
+
 
 .input-url {
   border: 2px solid var(--light-gray);
@@ -86,21 +77,4 @@
   align-self: flex-start;
 }
 
-/* color */
-.color-list {
-  display: flex;
-  gap: 0.5em;
-}
 
-.color,
-.logo-image {
-  width: 2em;
-  height: 2em;
-  border-radius: 4px;
-  display: inline-block;
-
-}
-
-.logo-image {
-  background-color: gray;
-}

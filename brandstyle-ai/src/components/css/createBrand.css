@@ -1,0 +1,25 @@
+@import url('./common.css');
+@import url('./variables.css');
+
+.add-palette {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background-color: transparent;
+  border: 1px solid var(--light-gray);
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-palette:hover {
+  background-color: var(--light-gray);
+}
+
+.color-field {
+  position: relative;
+}
+.save-brand{
+ margin-top: 1em;
+}
