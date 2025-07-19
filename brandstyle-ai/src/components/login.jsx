@@ -1,0 +1,219 @@
+import React, { useState } from "react"
+import { Button } from '@swc-react/button'
+import '../components/css/auth.css'
+import { ToastContainer, toast } from 'react-toastify'
+import { login } from "../services/auth"
+const Login = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
+  const [isError, setIsError] = useState(false)
+  const [emailInvalidError, setEmailInvalidError] = useState(false)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  })
+  const handleInputChange = (e) => {
+    console.log(e, 'change')
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+
+  }
+  // signing in/up
+  const handleSubmit = async (e) => {
+
+    e.preventDefault()
+    if (!isLogin) {
+      if (formData.password !== formData.confirmPassword) {
+        setIsError(true)
+        toast.error('Passwords must be the same')
+      }
+
+      if (!emailRegex.test(formData.email)) {
+        setEmailInvalidError(true)
+        toast.error('Email is invalid')
+
+      }
+      if (formData.confirmPassword !== '' && formData.email !== '' &&
+        formData.password !== '') {
+        let res = await register(formData)
+        let resultData = res.json()
+        console.log("Signup attempt:", resultData)
+      }
+
+    } else {
+      let data = { email: formData.email, password: formData.password }
+      // call api
+      let res = await login(data)
+      let resultData = res.json()
+
+      console.log("Login attempt:", resultData)
+    }
+
+  }
+
+  const toggleMode = () => {
+    setIsLogin(!isLogin)
+    setFormData({
+      email: "",
+      password: "",
+      confirmPassword: "",
+    })
+  }
+
+  const closeModal = () => {
+    setIsOpen(false)
+    setFormData({
+      email: "",
+      password: "",
+      confirmPassword: "",
+    })
+  }
+  return (
+    <div className="authContainer">
+      <Button onClick={() => setIsOpen(true)} className="openButton">
+        Open Auth Modal
+      </Button>
+
+      {isOpen && (
+        <div className="overlay" onClick={closeModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button onClick={closeModal} className="closeButton">
+              ×
+            </button>
+            {isLogin ?
+              (
+                <div>
+                  <div className="header">
+                    <h3 className="title" >"Welcome Back" </h3>
+                    <p className="subtitle">
+                      "Sign in to your account to continue"              </p>
+                  </div>
+
+                  <form className="form"
+                    onSubmit={handleSubmit}
+                  >
+                    <div className="inputGroup">
+                      <label className="label">Email</label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="input"
+                        required
+                      />
+                    </div>
+
+                    <div className="inputGroup">
+                      <label className="label">Password</label>
+                      <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        className="input"
+                        required
+                      />
+                    </div>
+
+
+
+                    <Button
+                      onClick={handleSubmit}
+                      type="submit" className="submitButton">
+
+                      "Sign In"               </Button>
+                  </form>
+
+                  <div className="footer" >
+                    <span className="footerText" >{isLogin ? "Don't have an account? " : "Already have an account? "}</span>
+                    <button type="button" onClick={toggleMode}
+                      className="link-btn">
+                      {isLogin ? "Sign up" : "Sign in"}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                {/* for register */}
+                  <h3 className='title'>
+                    Sign Up
+                  </h3>
+                  <p>  "Join us today and get started"
+                  </p>
+                  <form
+                    className="form"
+                    onSubmit={handleSubmit}
+                  >
+
+                    <div className="inputGroup">
+                      <label className="label">Email</label>
+                      <input
+                        type="email"
+                        name="email"
+                        onFocus={() => setEmailInvalidError(false)}
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className={`${emailInvalidError ? 'err' : 'input'}`}
+                        required
+                      />
+                    </div>
+
+                    <div className="inputGroup">
+                      <label className="label">Password</label>
+                      <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        className="input"
+                        required
+                      />
+                    </div>
+                    <div className="inputGroup">
+                      <label className="label">Confirm Password</label>
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        onFocus={() => setIsError(false)}
+                        value={formData.confirmPassword}
+                        onChange={handleInputChange}
+                        className={`${isError? 'err' : 'input'}`}
+                        required={!isLogin}
+                      />
+                    </div>
+
+                    <Button
+                      onClick={handleSubmit}
+                      type="submit" className="submitButton">
+                      Create Account            </Button>
+
+                  </form>
+
+                  <div className="footer" >
+                    <span className="footerText" >{isLogin ? "Don't have an account? " : "Already have an account? "}</span>
+                    <button type="button" onClick={toggleMode}
+                      className="link-btn">
+                      {isLogin ? "Sign up" : "Sign in"}
+                    </button>
+                  </div>
+                </div>
+              )
+            }
+
+          </div>
+        </div>
+
+      )}
+      <ToastContainer />
+    </div>
+  )
+}
+export default Login
+
+

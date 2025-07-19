@@ -14,6 +14,7 @@ import SuggestionPage from "./pages/suggestion";
 import VideoTools from "./pages/video-tools";
 import Templates from "./pages/templates";
 import CreateBrand from "./pages/create-brand";
+import SavedBrands from "./pages/saved-brands";
 
 const App = ({ addOnUISdk }) => {
 
@@ -22,23 +23,26 @@ const App = ({ addOnUISdk }) => {
     // Please note that the below "<Theme>" component does not react to theme changes in Express.
     // You may use "addOnUISdk.app.ui.theme" to get the current theme and react accordingly.
     <Theme system="express" scale="medium" color="light">
-    <div className="tabs">
-    <TabsOverflow>
+      <div className="tabs">
+        <TabsOverflow>
           <Tabs selected="upload-assets">
             <Tab label="Upload Assets" value="upload-assets"></Tab>
             <Tab label="Suggestions" value="suggestion" id="suggestion"></Tab>
             <Tab label="Brandify" value="create-brand" id="create-brand"></Tab>
             <Tab label="video" value="video" id="video"></Tab>
             <Tab label="templates" value="templates" id="templates"></Tab>
+            <Tab label="Saved" value="saved" id="saved"></Tab>
             <TabPanel value="upload-assets">
-
               <UploadAssetPage />
             </TabPanel>
             <TabPanel value="suggestion">
               <SuggestionPage />
             </TabPanel>
+            <TabPanel value="saved">
+              <SavedBrands />
+            </TabPanel>
             <TabPanel value="create-brand">
-              <CreateBrand/>
+              <CreateBrand />
             </TabPanel>
             <TabPanel value="video">
               <VideoTools />
@@ -48,8 +52,8 @@ const App = ({ addOnUISdk }) => {
             </TabPanel>
 
           </Tabs>
-    </TabsOverflow>
-    </div>
+        </TabsOverflow>
+      </div>
     </Theme>
   );
 };
