@@ -5,7 +5,13 @@ import { Accordion, AccordionItem } from "@swc-react/accordion";
 import { PlusCircle } from 'lucide-react';
 const CreateBrand = () => {
   const [url, setUrl] = useState('');
+  const [brandName, setBrandName] = useState('')
   const paletterContainerRef = useRef(null);
+  function handleBrandNameChange(event) {
+    event.preventDefault();
+    setBrandName(event.target.value);
+  }
+
   function handleUrlChange(event) {
     event.preventDefault();
     setUrl(event.target.value);
@@ -14,7 +20,7 @@ const CreateBrand = () => {
     console.log("URL entered:", url);
   }
   function addPalette(event) {
-    console.log(event.target.value,"color")
+    console.log(event.target.value, "color")
     let color = event.target.value
     const paletteContainer = paletterContainerRef.current;
     if (paletteContainer) {
@@ -23,7 +29,7 @@ const CreateBrand = () => {
       newPalette.style.backgroundColor = color; // Default color
       newPalette.style.marginRight = '0.5em';
       newPalette.contentEditable = true; // Make it editable
-      paletteContainer.style.marginBottom ="1em"
+      paletteContainer.style.marginBottom = "1em"
       paletteContainer.appendChild(newPalette);
     }
   }
@@ -104,6 +110,15 @@ const CreateBrand = () => {
 
         </AccordionItem>
       </Accordion>
+      <div className='url' style={{marginTop:"1em"}}>
+        <div>
+          <label htmlFor="brandName" className='label'>Your Brand Name</label>
+          <input type="text" id="brandName"
+            placeholder="type your brand name " value={brandName} onChange={handleBrandNameChange}
+            className='input-url' />
+        </div>
+      </div>
+
       <Button className='save-brand'>
         Save Brand
       </Button>
