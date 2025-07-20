@@ -11,22 +11,44 @@ class RegisterRequest(BaseModel):
 
 @router.post("/register", status_code=201)
 def register(req: RegisterRequest):
+    # Basic backend validation
+    if not req.email:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email is required."
+        )
+    if not req.password or len(req.password) < 6:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password must be at least 6 characters long."
+        )
     try:
         response = supabase.auth.sign_up({
             "email": req.email,
             "password": req.password
         })
-        print('user',response)
+        # Relay Supabase error messages if registration failed
+        if getattr(response, "error", None):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=str(response.error)
+            )
         user = getattr(response, 'user', None)
         if not user:
-            raise HTTPException(status_code=400, detail="Registration failed (no user returned).")
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Registration failed (no user returned)."
+            )
         return {
             "message": "Registration successful",
             "user_id": user.id,
             "email": user.email
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Internal server error: {e}"
+        )
 
 @router.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
@@ -35,11 +57,11 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
             "email": form_data.username,
             "password": form_data.password
         })
-        # AuthResponse fields are attributes, not dict keys!
+        # Relay Supabase error messages if login failed
         if getattr(response, "error", None):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail=str(response.error.message)
+                detail=str(response.error)
             )
         session = getattr(response, "session", None)
         user = getattr(response, "user", None)
@@ -58,4 +80,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
             }
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Internal server error: {e}"
+        )
