@@ -8,6 +8,20 @@ ul {
   margin: 0;
   padding: 0;
 }
+.margin-sm{
+ margin: 0.2em 0;
+}
+.margin-md{
+ margin: 0.6em 0;
+}
+.margin-lg{
+ margin:1em 0;
+}
+.flex-row{
+ display:flex;
+ gap: 1em;
+ align-items: center;
+}
 /* links */
 .url {
   display: grid;

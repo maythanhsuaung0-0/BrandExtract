@@ -16,6 +16,7 @@ def register(req: RegisterRequest):
             "email": req.email,
             "password": req.password
         })
+        print('user',response)
         user = getattr(response, 'user', None)
         if not user:
             raise HTTPException(status_code=400, detail="Registration failed (no user returned).")
