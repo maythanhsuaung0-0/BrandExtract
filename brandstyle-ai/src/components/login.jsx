@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { Button } from '@swc-react/button'
 import '../components/css/auth.css'
-import { ToastContainer, toast } from 'react-toastify'
 import { login, register } from "../services/auth"
+import toast from 'react-hot-toast'
 import { useAuth } from "../authContext"
 const Login = () => {
   const {user,token,setUpLogin} = useAuth()
@@ -216,7 +216,7 @@ const Login = () => {
         </div>
 
       )}
-      <ToastContainer />
+
     </div>
   )
 }
