@@ -6,23 +6,33 @@ import { PlusCircle } from 'lucide-react';
 import { useAuth } from '../authContext';
 import { createBrand } from '../services/brands';
 import Login from '../components/login';
+import toast from 'react-hot-toast'
 const CreateBrand = () => {
   const { user, token } = useAuth()
-  const [font, setFont] = useState([])
-  const [brandName, setBrandName] = useState('')
+  const [font, setFont] = useState()
+  const [brandName, setBrandName] = useState(null)
   const [colors, setColors] = useState([])
   const paletterContainerRef = useRef(null);
-  const [isdropping, setIsDropping] = useState(false);
-  const [file, setFile] = useState('');
-  const [previewUrl, setPreviewUrl] = useState()
-  const dropZoneRef = useRef(null);
+  const [logoUrl, setLogoUrl] = useState(null)
+  const [disable, setDisable] = useState(true)
   const fontsContainerRef = useRef(null)
   const fontIndex = useRef(0)
+
+  // for files
+  //  const [file, setFile] = useState('');
+  // const [previewUrl, setPreviewUrl] = useState()
+  //const dropZoneRef = useRef(null);
+  //const [isdropping, setIsDropping] = useState(false);
+
   function handleBrandNameChange(event) {
     event.preventDefault();
     setBrandName(event.target.value);
   }
 
+  function handleLogoUrlChange(event) {
+    event.preventDefault()
+    setLogoUrl(event.target.value)
+  }
   function handleFontChange(event) {
     let val = event.target.value
     setFont(val);
@@ -64,50 +74,73 @@ const CreateBrand = () => {
       setColors(colors)
     }
   }
-
-  function handleDragOver(event) {
-    event.preventDefault();
-    setIsDropping(true);
-  }
-  function handleFileInputChange(event) {
-    const selectedFiles = event.target.files;
-    if (selectedFiles.length > 0) {
-      console.log("Files selected:", selectedFiles);
-      setFile(selectedFiles[0]);
-      readFile(selectedFiles[0], setPreviewUrl)
-    }
-  }
-  function handleFileDrop(event) {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-
-    if (files.length > 0) {
-      console.log("Files dropped:", files);
-      setFile(files[0]);
-      setIsDropping(false);
-      readFile(files[0], setPreviewUrl)
-      // Handle file upload logic here
-
-    }
-  }
+  // for handling files
+  // function handleDragOver(event) {
+  //   event.preventDefault();
+  //   setIsDropping(true);
+  // }
+  // function handleFileInputChange(event) {
+  //   const selectedFiles = event.target.files;
+  //   if (selectedFiles.length > 0) {
+  //     console.log("Files selected:", selectedFiles);
+  //     setFile(selectedFiles[0]);
+  //     readFile(selectedFiles[0], setPreviewUrl)
+  //   }
+  // }
+  // function handleFileDrop(event) {
+  //   event.preventDefault();
+  //   const files = event.dataTransfer.files;
+  //
+  //   if (files.length > 0) {
+  //     console.log("Files dropped:", files);
+  //     setFile(files[0]);
+  //     setIsDropping(false);
+  //     readFile(files[0], setPreviewUrl)
+  //     // Handle file upload logic here
+  //
+  //   }
+  // }
   async function saveBrand() {
+
+    const paletteContainer = paletterContainerRef.current;
     const dynamicInputs = fontsContainerRef.current.querySelectorAll("input")
     const dynamicFonts = Array.from(dynamicInputs).map((input) => input.value)
-    const allFonts = [font, ...dynamicFonts]
-    console.log(allFonts, file, colors, brandName)
-    if (file == null && colors.length < 0 && brandName == null && allFonts.length < 0) {
-      console.log("no data")
+    let allFonts = []
+    if (dynamicFonts) {
+      allFonts.push(...dynamicFonts)
+    }
+    if (font) {
+      allFonts.push(font)
+    }
+
+    console.log(allFonts, logoUrl, colors, brandName)
+    // add file checking here as well if we use file
+    if (logoUrl == null && colors.length <= 0 && brandName == null && allFonts.length <= 0) {
+      toast('Form cannot be empty')
     }
     else {
+      console.log(brandName, colors, dynamicFonts, logoUrl)
+      console.log(logoUrl == null && colors.length < 0 && brandName == null && allFonts
+        .length < 0)
       const data = {
         name: brandName,
         colors: colors,
         fonts: allFonts,
-        logo_url: file
+        logo_url: logoUrl
       }
       if (token) {
         let res = await createBrand(data, token)
-        console.log('created successfully', res)
+        console.log('res', res)
+        if (res?.status === 201) {
+          toast.success('Saved brand successfully')
+          setLogoUrl('')
+          setBrandName('')
+          paletteContainer = "<div></div>"
+        }
+        else {
+          console.log('err shows up')
+          toast.error("Could'nt save brand, make sure you filled everything")
+        }
       }
     }
   }
@@ -118,53 +151,70 @@ const CreateBrand = () => {
     <div className='upload'>
       <Accordion size='s'>
         <AccordionItem label={"Upload Your Font"}>
-          <div className='url'>
-            <div className='margin-sm'>
-              <label htmlFor="font-0" className='label'>Font</label>
-              <input type="text" id="font-0"
-                placeholder="type your font name (eg.Arial)"
-                value={font}
-                onChange={handleFontChange}
-                className='input-url' />
+          <div className='margin-x-lg'>
+            <div className='url'>
+              <div className='margin-sm'>
+                <label htmlFor="font-0" className='label'>Font</label>
+                <input type="text" id="font-0"
+                  placeholder="type your font name (eg.Arial)"
+                  value={font}
+                  onChange={handleFontChange}
+                  className='input-url' />
+              </div>
+
+              <div ref={fontsContainerRef} className='fonts-container'></div>
+              <button className="add-palette" onClick={addFonts} >
+                <PlusCircle className='icon' />
+                <span > Add Fonts</span></button>
             </div>
-
-            <div ref={fontsContainerRef} className='fonts-container'></div>
           </div>
-          <button className="add-palette" onClick={addFonts} >
-            <PlusCircle className='icon' />
-            <span > Add Fonts</span></button>
-
         </AccordionItem>
         <AccordionItem label={"Upload Your Color Palette"}>
-          <div className='palette-container' ref={paletterContainerRef} ></div>
-          <div className='color-field'>
-            <input type="color" className='input-file' onChange={addPalette} />
-            <button className="add-palette" >
-              <PlusCircle className='icon' />
-              <span > Add Color</span></button>
+
+          <div className='margin-x-lg'>
+            <div className='url'>
+              <div className='palette-container' ref={paletterContainerRef} ></div>
+              <div className='color-field'>
+                <input type="color" className='input-file' onChange={addPalette} />
+                <button className="add-palette" >
+                  <PlusCircle className='icon' />
+                  <span > Add Color</span></button>
+              </div>
+            </div>
           </div>
         </AccordionItem>
         <AccordionItem label={"Upload Your Logo"}>
-          {!previewUrl ?
-            <div ref={dropZoneRef}
-              onDrop={handleFileDrop}
-              onDragOver={handleDragOver}
-              className={`drag-drop-area ${isdropping ? 'dropping' : ''}`}>
-              <div className="drag-drop-content">
-                <div className='upload-file' size="m" >
-                  <Button size="m">
-                    <span className='upload-icon'>
-                      Upload Logo File
-                    </span>
-                  </Button>
-                  <input type="file" onChange={handleFileInputChange} className='input-file' />
-                </div>
-                <span className='span'>or</span>
-                <div>Drop your logo file here</div>
-              </div>
+          <div className='url' style={{ marginTop: "1em" }}>
+            <div>
+              <label htmlFor="logoUrl" className='label'>Your Logo URL</label>
+              <input type="text" id="logoUrl"
+                placeholder="Enter your logo url (eg.https://www.logo.url)" value={logoUrl}
+                onChange={handleLogoUrlChange}
+                className='input-url' />
             </div>
-            : <img src={previewUrl} alt='logo' className='logoFile' />
-          }
+          </div>
+
+          {/*    for uploading file
+          {!previewUrl ?
+          <div ref={dropZoneRef}
+          onDrop={handleFileDrop}
+          onDragOver={handleDragOver}
+          className={`drag-drop-area ${isdropping ? 'dropping' : ''}`}>
+          <div className="drag-drop-content">
+          <div className='upload-file' size="m" >
+          <Button size="m">
+          <span className='upload-icon'>
+          Upload Logo File
+          </span>
+          </Button>
+          <input type="file" onChange={handleFileInputChange} className='input-file' />
+          </div>
+          <span className='span'>or</span>
+          <div>Drop your logo file here</div>
+          </div>
+          </div>
+          : <img src={previewUrl} alt='logo' className='logoFile' />
+          } */}
         </AccordionItem>
       </Accordion>
       <div className='url' style={{ marginTop: "1em" }}>
@@ -178,13 +228,13 @@ const CreateBrand = () => {
       </div>
       <div className='flex-row margin-lg'>
 
-        <Button disabled={token ? false : true}  onClick={saveBrand}>
+        <Button disabled={token ? false : true} onClick={saveBrand}>
           Save Brand
         </Button>
         {!token && <Login />}
       </div>
     </div>
-  </div>)
+  </div >)
 }
 export default CreateBrand;
 
