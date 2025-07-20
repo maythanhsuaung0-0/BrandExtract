@@ -15,6 +15,7 @@ import VideoTools from "./pages/video-tools";
 import Templates from "./pages/templates";
 import CreateBrand from "./pages/create-brand";
 import SavedBrands from "./pages/saved-brands";
+import { AuthProvider } from "./authContext";
 
 const App = ({ addOnUISdk }) => {
 
@@ -23,6 +24,7 @@ const App = ({ addOnUISdk }) => {
     // Please note that the below "<Theme>" component does not react to theme changes in Express.
     // You may use "addOnUISdk.app.ui.theme" to get the current theme and react accordingly.
     <Theme system="express" scale="medium" color="light">
+    <AuthProvider>
       <div className="tabs">
         <TabsOverflow>
           <Tabs selected="upload-assets">
@@ -54,6 +56,7 @@ const App = ({ addOnUISdk }) => {
           </Tabs>
         </TabsOverflow>
       </div>
+    </AuthProvider>
     </Theme>
   );
 };

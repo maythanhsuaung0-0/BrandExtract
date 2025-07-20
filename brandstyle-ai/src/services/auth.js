@@ -8,6 +8,8 @@ export async function login({ email, password }) {
   const params = new URLSearchParams();
   params.append("username", email);  // FastAPI expects `username` not `email`
   params.append("password", password);
+
+    console.log('data',params)
   const res = await axios.post(`${API_URL}/login`, params, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" }
   });
