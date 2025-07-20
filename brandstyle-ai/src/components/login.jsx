@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import { Button } from '@swc-react/button'
 import '../components/css/auth.css'
-import { ToastContainer, toast } from 'react-toastify'
-import { login } from "../services/auth"
+import { login, register } from "../services/auth"
+import toast from 'react-hot-toast'
+import { useAuth } from "../authContext"
 const Login = () => {
+  const {user,token,setUpLogin} = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [isLogin, setIsLogin] = useState(true)
   const [isError, setIsError] = useState(false)
@@ -40,18 +42,22 @@ const Login = () => {
       }
       if (formData.confirmPassword !== '' && formData.email !== '' &&
         formData.password !== '') {
-        let res = await register(formData)
-        let resultData = res.json()
-        console.log("Signup attempt:", resultData)
+
+        let data = { email: formData.email, password: formData.password }
+        let res = await register(data)
+        console.log("Signup attempt:", res)
       }
 
     } else {
       let data = { email: formData.email, password: formData.password }
       // call api
       let res = await login(data)
-      let resultData = res.json()
 
-      console.log("Login attempt:", resultData)
+      console.log("Login attempt:", res)
+      if (res) {
+       localStorage.setItem("access_token",res.access_token)
+       setUpLogin(res) 
+      }
     }
 
   }
@@ -76,7 +82,7 @@ const Login = () => {
   return (
     <div className="authContainer">
       <Button onClick={() => setIsOpen(true)} className="openButton">
-        Open Auth Modal
+    Sign In/Sign Up
       </Button>
 
       {isOpen && (
@@ -140,7 +146,7 @@ const Login = () => {
                 </div>
               ) : (
                 <div>
-                {/* for register */}
+                  {/* for register */}
                   <h3 className='title'>
                     Sign Up
                   </h3>
@@ -183,7 +189,7 @@ const Login = () => {
                         onFocus={() => setIsError(false)}
                         value={formData.confirmPassword}
                         onChange={handleInputChange}
-                        className={`${isError? 'err' : 'input'}`}
+                        className={`${isError ? 'err' : 'input'}`}
                         required={!isLogin}
                       />
                     </div>
@@ -210,7 +216,7 @@ const Login = () => {
         </div>
 
       )}
-      <ToastContainer />
+
     </div>
   )
 }
