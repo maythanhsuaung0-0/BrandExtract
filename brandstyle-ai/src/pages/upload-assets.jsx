@@ -52,6 +52,9 @@ const UploadAssetPage = () => {
       readFile(files[0], setPreviewUrl);
     }
   }
+  const closeModal = (state) => {
+    setIsOpen(state)
+  }
 
   async function createExtraction() {
     setIsProcessing(true);
@@ -229,13 +232,20 @@ const UploadAssetPage = () => {
             </div>
           </div>
         </div>
-      )}
+      }
 
-      {/* Brand DNA Display with Preview */}
-      {extractedData && (
+      {loading &&
+        <div> <img src="/Loading.gif" width={400} height={400} alt="generating..." className='gif' /></div>
+      }
+      {/* show extracted brand dna here */}
+      {!loading && extractedData &&
         <div className="extracted-brand-dna">
-          <h3>Extracted Brand DNA</h3>
-
+          <div className='flex-row gap-sm'>
+            <h3>Extracted Brand DNA</h3>
+            <div className='margin-auto-l iconBtn' onClick={clickSaveBtn} >
+              <Heart className='icon' />
+            </div>
+          </div>
           <div className='brand-dna-item'>
             <span>Colors: </span>
             <div className='color-list'>
@@ -260,6 +270,34 @@ const UploadAssetPage = () => {
               ))}
             </div>
           </div>
+
+          <div className='brand-dna-item logo'>
+            <span>Logo</span>
+            {extractedData.logo_url ?
+              <img src={extractedData.logo_url} className='logo-image' alt="logo" />
+              :
+              <div className='logo-image'>
+              </div>
+            }
+          </div>
+        </div>
+      }
+      {isOpen && <Modal isOpen={isOpen} closeModal={closeModal}>
+        <div>
+          <label htmlFor="font-0" className='label'>Font</label>
+          <div className='flex-row gap-sm'>
+            <input type="text" id="font-0"
+              placeholder="Enter your brand name "
+              value={brand}
+              onChange={handleBrandChange}
+              className='input-url' />
+          </div>
+          <Button onClick={saveBrand}>
+            Save
+          </Button>
+        </div>
+      </Modal>}
+    </div >
 
           <div className='brand-dna-item logo'>
             <span>Logo: </span>
