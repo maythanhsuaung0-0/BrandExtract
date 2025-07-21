@@ -22,6 +22,7 @@ def register(req: RegisterRequest):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Password must be at least 6 characters long."
         )
+    
     try:
         response = supabase.auth.sign_up({
             "email": req.email,

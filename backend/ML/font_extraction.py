@@ -28,7 +28,7 @@ def identify_font_with_gemini(image: Image.Image) -> Optional[str]:
         "with no extra text or explanations. If you are not sure, give your best guess."
     )
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         print("[INFO] Asking Gemini to identify the font...")
         response = model.generate_content([prompt, image])
         font_name = response.text.strip().replace("*", "").replace("`", "")
@@ -48,7 +48,7 @@ def map_single_font_to_adobe_with_gemini(font_name: str) -> Optional[str]:
         "Respond with ONLY the font name."
     )
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         print(f"[INFO] Mapping '{font_name}' to Adobe Fonts using Gemini...")
         resp = model.generate_content(prompt)
         adobe_font = resp.text.strip().replace("*", "").replace("`", "")
@@ -119,7 +119,7 @@ def map_fonts_to_adobe_with_gemini(font_list: List[str], website_url: str) -> Di
         "\nIf an exact match does not exist, pick the most visually similar Adobe font."
     )
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         print("[INFO] Asking Gemini to map fonts to Adobe library...")
         resp = model.generate_content(prompt)
         # Parse the JSON response

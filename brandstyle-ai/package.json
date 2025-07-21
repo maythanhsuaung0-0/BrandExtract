@@ -15,6 +15,7 @@
         "panel"
     ],
     "dependencies": {
+        "@adobe/pdfservices-node-sdk": "^4.1.0",
         "@spectrum-web-components/field-label": "^1.7.0",
         "@spectrum-web-components/textfield": "^1.7.0",
         "@swc-react/accordion": "^1.7.0",
@@ -27,6 +28,7 @@
         "@swc-react/textfield": "^1.7.0",
         "@swc-react/theme": "^1.0.3",
         "axios": "^1.10.0",
+        "form-data": "^4.0.4",
         "lucide-react": "^0.525.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
