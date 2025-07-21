@@ -4,6 +4,7 @@ import '../components/css/auth.css'
 import { login, register } from "../services/auth"
 import toast from 'react-hot-toast'
 import { useAuth } from "../authContext"
+import Modal from "./modal"
 const Login = () => {
   const { user, token, setUpLogin } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
@@ -71,8 +72,8 @@ const Login = () => {
     })
   }
 
-  const closeModal = () => {
-    setIsOpen(false)
+  const closeModal = (state) => {
+    setIsOpen(state)
     setFormData({
       email: "",
       password: "",
@@ -84,142 +85,135 @@ const Login = () => {
       <Button onClick={() => setIsOpen(true)} className="openButton">
         Sign In/Sign Up
       </Button>
+    {isOpen &&
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        {isLogin ?
+          (
+            <div>
+              <div className="header">
+                <h3 className="title" >Welcome Back </h3>
+                <p className="subtitle">
+                  Sign in to your account to continue              </p>
+              </div>
 
-      {isOpen && (
-        <div className="overlay" onClick={closeModal}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <button onClick={closeModal} className="closeButton">
-              ×
-            </button>
-            {isLogin ?
-              (
-                <div>
-                  <div className="header">
-                    <h3 className="title" >Welcome Back </h3>
-                    <p className="subtitle">
-                      Sign in to your account to continue              </p>
-                  </div>
-
-                  <form className="form"
-                    onSubmit={handleSubmit}
-                  >
-                    <div className="inputGroup">
-                      <label className="label">Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="input"
-                        required
-                      />
-                    </div>
-
-                    <div className="inputGroup">
-                      <label className="label">Password</label>
-                      <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        className="input"
-                        required
-                      />
-                    </div>
-
-
-
-                    <Button
-                      onClick={handleSubmit}
-                      type="submit" className="submitButton">
-
-                      Sign In </Button>
-                  </form>
-
-                  <div className="footer" >
-                    <span className="footerText" >{isLogin ? "Don't have an account? " : "Already have an account? "}</span>
-                    <button type="button" onClick={toggleMode}
-                      className="link-btn">
-                      {isLogin ? "Sign up" : "Sign in"}
-                    </button>
-                  </div>
+              <form className="form"
+                onSubmit={handleSubmit}
+              >
+                <div className="inputGroup">
+                  <label className="label">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="input"
+                    required
+                  />
                 </div>
-              ) : (
-                <div>
-                  {/* for register */}
-                  <div className="header">
-                    <h3 className='title'>
-                      Sign Up
-                    </h3>
-                    <p>  Join us today and get started
-                    </p>
-                  </div>
-                  <form
-                    className="form"
-                    onSubmit={handleSubmit}
-                  >
 
-                    <div className="inputGroup">
-                      <label className="label">Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        onFocus={() => setEmailInvalidError(false)}
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className={`${emailInvalidError ? 'err' : 'input'}`}
-                        required
-                      />
-                    </div>
-
-                    <div className="inputGroup">
-                      <label className="label">Password</label>
-                      <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        className="input"
-                        required
-                      />
-                    </div>
-                    <div className="inputGroup">
-                      <label className="label">Confirm Password</label>
-                      <input
-                        type="password"
-                        name="confirmPassword"
-                        onFocus={() => setIsError(false)}
-                        value={formData.confirmPassword}
-                        onChange={handleInputChange}
-                        className={`${isError ? 'err' : 'input'}`}
-                        required={!isLogin}
-                      />
-                    </div>
-
-                    <Button
-                      onClick={handleSubmit}
-                      type="submit" className="submitButton">
-                      Create Account </Button>
-
-                  </form>
-
-                  <div className="footer" >
-                    <span className="footerText" >{isLogin ? "Don't have an account? " : "Already have an account? "}</span>
-                    <button type="button" onClick={toggleMode}
-                      className="link-btn">
-                      {isLogin ? "Sign up" : "Sign in"}
-                    </button>
-                  </div>
+                <div className="inputGroup">
+                  <label className="label">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="input"
+                    required
+                  />
                 </div>
-              )
-            }
 
-          </div>
-        </div>
 
-      )}
 
+                <Button
+                  onClick={handleSubmit}
+                  type="submit" className="submitButton">
+
+                  Sign In </Button>
+              </form>
+
+              <div className="footer" >
+                <span className="footerText" >{isLogin ? "Don't have an account? " : "Already have an account? "}</span>
+                <button type="button" onClick={toggleMode}
+                  className="link-btn">
+                  {isLogin ? "Sign up" : "Sign in"}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              {/* for register */}
+              <div className="header">
+                <h3 className='title'>
+                  Sign Up
+                </h3>
+                <p>  Join us today and get started
+                </p>
+              </div>
+              <form
+                className="form"
+                onSubmit={handleSubmit}
+              >
+
+                <div className="inputGroup">
+                  <label className="label">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    onFocus={() => setEmailInvalidError(false)}
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className={`${emailInvalidError ? 'err' : 'input'}`}
+                    required
+                  />
+                </div>
+
+                <div className="inputGroup">
+                  <label className="label">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="input"
+                    required
+                  />
+                </div>
+                <div className="inputGroup">
+                  <label className="label">Confirm Password</label>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    onFocus={() => setIsError(false)}
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    className={`${isError ? 'err' : 'input'}`}
+                    required={!isLogin}
+                  />
+                </div>
+
+                <Button
+                  onClick={handleSubmit}
+                  type="submit" className="submitButton">
+                  Create Account </Button>
+
+              </form>
+
+              <div className="footer" >
+                <span className="footerText" >{isLogin ? "Don't have an account? " : "Already have an account? "}</span>
+                <button type="button" onClick={toggleMode}
+                  className="link-btn">
+                  {isLogin ? "Sign up" : "Sign in"}
+                </button>
+              </div>
+            </div>
+          )
+        }
+      </Modal>
+    }
     </div>
+
+
   )
 }
 export default Login
