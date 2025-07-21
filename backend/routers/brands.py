@@ -35,7 +35,6 @@ class BrandOut(BrandBase):
 @router.post("/", response_model=BrandOut, status_code=status.HTTP_201_CREATED)
 def create_brand(brand: BrandCreate, current_user: User = Depends(get_current_user)):
     """Creates a new brand for the authenticated user."""
-    print('brand',brand)
     try:
         # Pydantic v2 uses .model_dump()
         brand_data = brand.dict() 

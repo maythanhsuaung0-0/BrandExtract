@@ -95,7 +95,7 @@
   outline: none;
 }
 .err{
-  border: 2px solid #D62828;
+  border: 2px solid var(--error-color);
 }
 .input{
 

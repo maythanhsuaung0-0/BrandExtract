@@ -40,7 +40,9 @@ export async function updateBrand(id, data, token) {
 
 // Delete a brand by ID
 export async function deleteBrand(id, token) {
-  await axios.delete(`${API_URL}/${id}`, {
+  console.log('delete',id)
+  let res=  await axios.delete(`${API_URL}/${id}`, {
     headers: { Authorization: `Bearer ${token}` }
   });
+  return res
 }
