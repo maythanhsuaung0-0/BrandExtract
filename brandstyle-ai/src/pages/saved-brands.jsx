@@ -3,7 +3,9 @@ import "../components/css/savedBrand.css"
 import Login from "../components/login";
 import { useAuth } from "../authContext";
 import { fetchBrands } from "../services/brands";
-import { TypeOutline,Palette } from "lucide-react";
+import { TypeOutline, RefreshCcw, Palette, Trash } from "lucide-react";
+import { deleteBrand } from "../services/brands";
+import toast from "react-hot-toast";
 const SavedBrands = () => {
   const { user, token } = useAuth()
   const [data, setData] = useState(null)
@@ -14,6 +16,40 @@ const SavedBrands = () => {
       console.log(res.data, 'lala')
       setData(res.data)
     }
+  }
+  const deleteTheBrand = async (index, token) => {
+    let res = await deleteBrand(index, token)
+    return res
+  }
+  const removeBrand = async (index, name) => {
+    console.log(index, 'to delete')
+    toast((t) => (
+      <div>
+        <div>Are you sure you want to delete this brand {name}?</div>
+        <div className="flex-row gap-sm">
+          <button onClick={() => { toast.dismiss(t.id) }}>
+            Cancel
+          </button>
+
+          <button onClick={async () => {
+            let res = await deleteTheBrand(index, token)
+            console.log(res)
+            if (res.status == 204) {
+              toast.success('Successfully delete the brand')
+              fetch()
+            }
+            else {
+              toast.error("Could'nt delete the brand")
+            }
+            toast.dismiss(t.id)
+          }}>
+            Delete
+          </button>
+        </div>
+      </div>
+    ), {
+      duration: 4000,
+    });
 
   }
   useEffect(() => {
@@ -23,22 +59,33 @@ const SavedBrands = () => {
   }, [token])
   return (
     <div className="container">
-      <h3 className="page-title">{user?user.email.split('@')[0]+"'s":"Your"} Creation</h3>
+      <h3 className="page-title">{user ? user.email.split('@')[0] + "'s" : "Your"} Creation</h3>
       {
         token ?
           <>
             {data ?
               <div>
+              <div className="flex-row gap-sm">
                 <p>This is a collection of the brands themes you created.</p>
+                <div
+              onClick={fetch}
+              className="margin-auto-l iconBtn"
+              >
+                  <RefreshCcw  className="icon"/>
+                </div>
+              </div>
                 <div className="brands">
                   {data.map((brand) =>
                     <div key={brand.id}>
-                      <div className="brand-card" style={{backgroundColor:brand.colors[0]+"1A"}}>
+                      <div className="brand-card" style={{ backgroundColor: brand.colors[0] + "1A" }}>
                         <div className="flex-row" >
                           <img className="brand-card-logo" alt="logo"
                             src={brand.logo_url}
                           />
                           <h3>{brand.name}</h3>
+                          <div onClick={() => removeBrand(brand.id, brand.name)} className="trash-container">
+                            <Trash className="icon" />
+                          </div>
                         </div>
 
                         <div className="flex-col gap-sm">
@@ -46,10 +93,9 @@ const SavedBrands = () => {
                             <Palette className="icon" />
                             <span>Colors</span></div>
                           <div className="color-list">
-                            {brand.colors.map((color) =>
+                            {brand.colors.map((color, e) =>
                               <>
-                              <div className="color w-sm" style={{backgroundColor:color}}></div>
-
+                                <div key={e} className="color w-sm" style={{ backgroundColor: color }}></div>
                               </>
                             )}
                           </div>
@@ -57,12 +103,11 @@ const SavedBrands = () => {
                         <div className="flex-col gap-sm">
                           <div className="brand-card-ttl flex-row">
                             <TypeOutline className="icon" />
-
-                            <span>     Typography</span></div>
+                            <span> Typography</span></div>
                           <div className="font-lists">
-                            {brand.fonts.map((font) =>
-                              <div className="font-container">
-                              <span>{font}</span>
+                            {brand.fonts.map((font, e) =>
+                              <div key={e} className="font-container">
+                                <span >{font}</span>
                               </div>
                             )}
                           </div>

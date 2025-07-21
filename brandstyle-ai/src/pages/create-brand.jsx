@@ -6,7 +6,9 @@ import { PlusCircle } from 'lucide-react';
 import { useAuth } from '../authContext';
 import { createBrand } from '../services/brands';
 import Login from '../components/login';
-import toast from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
+import { Trash } from "lucide-react"
+import readFile from '../services/util';
 const CreateBrand = () => {
   const { user, token } = useAuth()
   const [font, setFont] = useState()
@@ -16,7 +18,9 @@ const CreateBrand = () => {
   const [logoUrl, setLogoUrl] = useState(null)
   const [disable, setDisable] = useState(true)
   const fontsContainerRef = useRef(null)
+  const firstFont = useRef(null)
   const fontIndex = useRef(0)
+
 
   // for files
   //  const [file, setFile] = useState('');
@@ -48,18 +52,36 @@ const CreateBrand = () => {
       label.textContent = 'Font';
       // input
       const input = document.createElement('input');
+      const div = document.createElement('div');
+      const trashContainer = document.createElement('div');
+      const trash = document.createElement('div')
+      trashContainer.style.fontSize = "1.3em"
+      trashContainer.classList.add("iconBtn")
+      trash.classList.add('trash-icon')
+      trashContainer.appendChild(trash)
       input.type = 'text';
       input.id = `font-${index}`;
       input.placeholder = 'type your font name (eg.Arial)';
       input.className = 'input-url';
+      div.classList.add("flex-row")
+      div.classList.add("gap-sm")
+      div.appendChild(input)
+      div.appendChild(trashContainer)
+      trashContainer.addEventListener('click', async function() {
+        container.remove()
+      })
       container.classList.add("margin-sm")
       container.appendChild(label);
-      container.appendChild(input);
+      container.appendChild(div);
       fontContainer.appendChild(container)
     }
   }
+
+  function removeFirstInput() {
+    firstFont?.current.remove()
+    setFont(null)
+  }
   function addPalette(event) {
-    console.log(event.target.value, "color")
     let color = event.target.value
     const paletteContainer = paletterContainerRef.current;
     if (paletteContainer) {
@@ -119,9 +141,6 @@ const CreateBrand = () => {
       toast('Form cannot be empty')
     }
     else {
-      console.log(brandName, colors, dynamicFonts, logoUrl)
-      console.log(logoUrl == null && colors.length < 0 && brandName == null && allFonts
-        .length < 0)
       const data = {
         name: brandName,
         colors: colors,
@@ -130,7 +149,6 @@ const CreateBrand = () => {
       }
       if (token) {
         let res = await createBrand(data, token)
-        console.log('res', res)
         if (res?.status === 201) {
           toast.success('Saved brand successfully')
           setLogoUrl('')
@@ -138,7 +156,6 @@ const CreateBrand = () => {
           paletteContainer = "<div></div>"
         }
         else {
-          console.log('err shows up')
           toast.error("Could'nt save brand, make sure you filled everything")
         }
       }
@@ -153,13 +170,19 @@ const CreateBrand = () => {
         <AccordionItem label={"Upload Your Font"}>
           <div className='margin-x-lg'>
             <div className='url'>
-              <div className='margin-sm'>
+              <div ref={firstFont} className='margin-sm'>
                 <label htmlFor="font-0" className='label'>Font</label>
-                <input type="text" id="font-0"
-                  placeholder="type your font name (eg.Arial)"
-                  value={font}
-                  onChange={handleFontChange}
-                  className='input-url' />
+                <div className='flex-row gap-sm'>
+                  <input type="text" id="font-0"
+                    placeholder="type your font name (eg.Arial)"
+                    value={font}
+                    onChange={handleFontChange}
+                    className='input-url' />
+                  <div onClick={removeFirstInput} className="iconBtn">
+                   <div className="trash-icon"></div>
+                  </div>
+
+                </div>
               </div>
 
               <div ref={fontsContainerRef} className='fonts-container'></div>
@@ -238,18 +261,4 @@ const CreateBrand = () => {
 }
 export default CreateBrand;
 
-const readFile = (file, setPreviewUrl) => {
-  console.log(file, file.type, 'f')
-  if (file && file.type.startsWith('image/')) {
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      setPreviewUrl(reader.result)
-    }
 
-    reader.readAsDataURL(file)
-  }
-  else {
-    alert("Unsupported File Type, only image files")
-    setPreviewUrl(null)
-  }
-}

@@ -14,20 +14,26 @@ DEFAULT_NUM_COLORS = 5
 DEFAULT_NUM_FONTS = 2
 
 # --- Response Models ---
+
+
 class BrandDNA(BaseModel):
     colors: List[str]
     fonts: List[str]
     logo_url: Optional[HttpUrl]
 
+
 class StyleTransferRequest(BaseModel):
     template_id: str
     brand_id: str
+
 
 class StyleTransferResult(BaseModel):
     asset_url: str
     summary: Optional[str] = None
 
 # ========== Brand DNA Extraction ==========
+
+
 @router.post("/extract/dna", response_model=BrandDNA)
 async def extract_brand_dna(
     file: Optional[UploadFile] = File(None),
@@ -41,7 +47,8 @@ async def extract_brand_dna(
     Sensible defaults for num_colors, num_fonts.
     """
     if file and url:
-        raise HTTPException(status_code=400, detail="Provide either a file or URL, not both.")
+        raise HTTPException(
+            status_code=400, detail="Provide either a file or URL, not both.")
     if not file and not url:
         raise HTTPException(status_code=400, detail="No file or URL provided.")
 
@@ -58,11 +65,13 @@ async def extract_brand_dna(
             logo_url = None
             if logo_path:
                 # TODO: might want to upload to CDN, here just return file name
-                logo_url = f"/static/{logo_path}"  # adjust as needed for your CDN/static
+                # adjust as needed for your CDN/static
+                logo_url = f"/static/{logo_path}"
         finally:
             os.remove(tmp_path)
     else:
         # Handle website or image URL
+        print(url)
         src = str(url)
         colors = extract_palette_dispatch(src, num_colors)
         fonts = extract_font_dispatch(src, num_fonts)
@@ -74,6 +83,8 @@ async def extract_brand_dna(
     return BrandDNA(colors=colors, fonts=fonts, logo_url=logo_url)
 
 # ========== Neural Style Transfer ==========
+
+
 @router.post("/extract/style", response_model=StyleTransferResult)
 async def style_transfer(
     req: StyleTransferRequest,
@@ -83,6 +94,7 @@ async def style_transfer(
     Apply neural style transfer to a template using a brand's DNA.
     """
     # For now, mock
-    asset_url = f"https://cdn.example.com/generated/{req.template_id}_on_brand.png"
+    asset_url = f"https://cdn.example.com/generated/{
+        req.template_id}_on_brand.png"
     summary = "Applied your brand palette and fonts to the template."
     return StyleTransferResult(asset_url=asset_url, summary=summary)

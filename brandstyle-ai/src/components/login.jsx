@@ -5,7 +5,7 @@ import { login, register } from "../services/auth"
 import toast from 'react-hot-toast'
 import { useAuth } from "../authContext"
 const Login = () => {
-  const {user,token,setUpLogin} = useAuth()
+  const { user, token, setUpLogin } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [isLogin, setIsLogin] = useState(true)
   const [isError, setIsError] = useState(false)
@@ -55,8 +55,8 @@ const Login = () => {
 
       console.log("Login attempt:", res)
       if (res) {
-       localStorage.setItem("access_token",res.access_token)
-       setUpLogin(res) 
+        localStorage.setItem("access_token", res.access_token)
+        setUpLogin(res)
       }
     }
 
@@ -82,7 +82,7 @@ const Login = () => {
   return (
     <div className="authContainer">
       <Button onClick={() => setIsOpen(true)} className="openButton">
-    Sign In/Sign Up
+        Sign In/Sign Up
       </Button>
 
       {isOpen && (
@@ -95,9 +95,9 @@ const Login = () => {
               (
                 <div>
                   <div className="header">
-                    <h3 className="title" >"Welcome Back" </h3>
+                    <h3 className="title" >Welcome Back </h3>
                     <p className="subtitle">
-                      "Sign in to your account to continue"              </p>
+                      Sign in to your account to continue              </p>
                   </div>
 
                   <form className="form"
@@ -133,7 +133,7 @@ const Login = () => {
                       onClick={handleSubmit}
                       type="submit" className="submitButton">
 
-                      "Sign In"               </Button>
+                      Sign In </Button>
                   </form>
 
                   <div className="footer" >
@@ -147,11 +147,13 @@ const Login = () => {
               ) : (
                 <div>
                   {/* for register */}
-                  <h3 className='title'>
-                    Sign Up
-                  </h3>
-                  <p>  "Join us today and get started"
-                  </p>
+                  <div className="header">
+                    <h3 className='title'>
+                      Sign Up
+                    </h3>
+                    <p>  Join us today and get started
+                    </p>
+                  </div>
                   <form
                     className="form"
                     onSubmit={handleSubmit}
@@ -197,7 +199,7 @@ const Login = () => {
                     <Button
                       onClick={handleSubmit}
                       type="submit" className="submitButton">
-                      Create Account            </Button>
+                      Create Account </Button>
 
                   </form>
 

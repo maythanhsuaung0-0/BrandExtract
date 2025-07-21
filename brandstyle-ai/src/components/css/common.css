@@ -25,7 +25,9 @@ ul {
 .margin-lg {
   margin: 1em 0;
 }
-
+.margin-auto-l{
+ margin-left:auto;
+}
 .flex-row {
   display: flex;
   gap: 1em;
@@ -95,7 +97,20 @@ ul {
   width: 1em;
   height: 1em;
 }
-
+.iconBtn{
+  width: 1.5em;
+  height: 1.5em;
+ display: grid;
+ justify-content: center;
+ align-items: center;
+ cursor: pointer;
+ background-color: var(--lighter-gray);
+ transition: background-color 5ms ease-in-out;
+ border-radius:999px;
+}
+.iconBtn:hover{
+  background-color: var(--light-gray);
+}
 .container {
   margin: 1.5em 1em;
   display: flex;
@@ -112,13 +127,8 @@ ul {
   margin: 1em 0 2em;
 }
 
-.color,
 .logo-image {
-  width: 2em;
-  height: 2em;
-  border-radius: 4px;
-  display: inline-block;
-
+ object-fit: cover;
 }
 
 /* for carousel */
@@ -190,9 +200,43 @@ ul {
   display: inline-block;
 
 }
-.color{
- border: 1px solid var(--light-gray);
+
+.color {
+  border: 1px solid var(--light-gray);
 }
+
 .logo-image {
   background-color: gray;
 }
+
+.logoFile {
+  width: 250px;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.trash-container{
+ margin-left: auto;
+ border-radius:999px;
+ color: var(--error-color) ;
+ background-color: #D628281A;
+ cursor: pointer;
+ width: 1.5em;
+ height: 1.5em;
+ display: grid;
+ justify-content: center;
+ align-items: center;
+ transition: background-color 5ms ease-in-out;
+}
+
+.trash-container:hover{
+ background-color:   #D628284D;
+ }
+ /* special for js generated html */
+ .trash-icon{
+ width: 0.8em;
+ height: 1px;
+ border-radius:999px;
+ background-color: #000;
+ }
