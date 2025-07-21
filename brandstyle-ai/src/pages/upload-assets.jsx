@@ -6,9 +6,15 @@ import readFile from '../services/util';
 import { extractBrand } from '../services/extract';
 import { handleBrandifyClick } from '../services/brandify';  // See above!
 import Login from '../components/login';
-
+import { Heart } from 'lucide-react';
+import { createBrand } from '../services/brands';
+import toast from 'react-hot-toast';
+import Modal from '../components/modal';
 const UploadAssetPage = () => {
-  const { token } = useAuth();
+  const [loading, setLoading] = useState(false)
+  const { token } = useAuth()
+  const [isProcessing,setIsProcessing] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [isdropping, setIsDropping] = useState(false);
   const [extractedData, setExtractedData] = useState(null);
   const [url, setUrl] = useState('');
@@ -84,6 +90,7 @@ const UploadAssetPage = () => {
 
   // MAIN BRANDIFY FUNCTION
   async function handleBrandify() {
+    console.log('was clicked')
     if (!extractedData) {
       alert("No brand data to apply. Extract brand first.");
       return;
@@ -232,7 +239,7 @@ const UploadAssetPage = () => {
             </div>
           </div>
         </div>
-      }
+      )}
 
       {loading &&
         <div> <img src="/Loading.gif" width={400} height={400} alt="generating..." className='gif' /></div>
@@ -297,7 +304,18 @@ const UploadAssetPage = () => {
           </Button>
         </div>
       </Modal>}
-    </div >
+    {extractedData &&
+        <div>
+          <div className='brand-dna-item font'>
+            <span>Fonts: </span>
+            <div className='sub-title'>
+              {extractedData.fonts?.map((font, id) => (
+                <div key={id} style={{ fontFamily: font }}>
+                  {font} {id === 0 && "(Primary)"}
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div className='brand-dna-item logo'>
             <span>Logo: </span>
@@ -334,8 +352,9 @@ const UploadAssetPage = () => {
             {isProcessing ? 'Brandifying...' : 'Brandify Document'}
           </Button>
         </div>
-      )}
-    </div>
+    }
+
+  </div>
   );
 };
 
