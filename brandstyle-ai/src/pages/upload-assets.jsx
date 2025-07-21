@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Button } from "@swc-react/button";
 import '../components/css/upload-assets.css';
@@ -20,21 +21,54 @@ const UploadAssetPage = () => {
   const [url, setUrl] = useState('');
   const [chosenUrl, setChosenUrl] = useState(null);
   const [files, setFiles] = useState([]);
-  const [previewUrl, setPreviewUrl] = useState(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [brandifyResult, setBrandifyResult] = useState(null);
-  const [previewMode, setPreviewMode] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState(null)
+  const [brand, setbrand] = useState(null)
   const dropZoneRef = useRef(null);
 
   function handleUrlChange(event) {
     event.preventDefault();
     setUrl(event.target.value);
   }
+  function handleBrandChange(event) {
 
+    event.preventDefault();
+    setbrand(event.target.value);
+  }
+  async function saveBrand() {
+    console.log(brand, 'brand name')
+let newData = { ...extractedData };
+    setExtractedData({ name: brand, colors: extractedData.colors, fonts: extractedData.fonts, logo_url: extractedData?.logo_url })
+    console.log(extractedData, 'is saved')
+
+    if (token && extractedData) {
+      if (brand) {
+        newData.name = brand
+      }
+      if (extractedData.logo_url === null) {
+        newData.logo_url = "https://dummyimage.com/600x400/ffffff/fff.jpg&text=placeholder" 
+      }
+      try {
+        console.log('tryting to add',newData)
+        let res = await createBrand(newData, token)
+        if (res?.status === 201) {
+          toast.success('Saved brand successfully')
+        }
+        else {
+          toast.error("Could'nt save brand, make sure you filled everything")
+        }
+
+      } catch (error) {
+        toast.error(error)
+      }
+    }
+
+  }
   function handleClick() {
     setChosenUrl(url);
   }
-
+  async function clickSaveBtn() {
+    setIsOpen(true)
+  }
   function handleDragOver(event) {
     event.preventDefault();
     setIsDropping(true);
@@ -63,9 +97,7 @@ const UploadAssetPage = () => {
   }
 
   async function createExtraction() {
-    setIsProcessing(true);
-
-    let formData = new FormData();
+    let formData = new FormData()
     if (files[0]) {
       formData.append("file", files[0]);
     }
@@ -75,14 +107,21 @@ const UploadAssetPage = () => {
 
     if (files[0] !== null || chosenUrl !== null) {
       try {
-        let res = await extractBrand(formData, token);
+        setLoading(true)
+        let res = await extractBrand(formData, token)
         if (res.status === 200) {
-          setExtractedData(res.data);
-        } else {
-          alert("Something went wrong, cannot extract brand");
+          setExtractedData(res.data)
+          console.log(res.data)
         }
-      } catch (error) {
-        alert("Extraction failed: " + error.message);
+        else {
+          toast.error("Something went wrong, cannot extract brand")
+        }
+      }
+      catch (err) {
+        toast.error(err)
+      }
+      finally {
+        setLoading(false)
       }
     }
     setIsProcessing(false);
@@ -255,26 +294,24 @@ const UploadAssetPage = () => {
           </div>
           <div className='brand-dna-item'>
             <span>Colors: </span>
-            <div className='color-list'>
-              {extractedData.colors?.map((color, id) => (
-                <div
-                  key={id}
-                  className='color'
-                  style={{ backgroundColor: color }}
-                  title={color}
-                ></div>
-              ))}
+            <div className=' color-list'>
+              {extractedData.colors?.map((color, id) =>
+                <div key={id} className='color' style={{ backgroundColor: color }}></div>
+              )
+              }
             </div>
           </div>
-
           <div className='brand-dna-item font'>
-            <span>Fonts: </span>
+            <span>Font</span>
             <div className='sub-title'>
-              {extractedData.fonts?.map((font, id) => (
-                <div key={id} style={{ fontFamily: font }}>
-                  {font} {id === 0 && "(Primary)"}
+              {extractedData.fonts?.map((font, id) =>
+                <div key={id}>
+                  {font.startsWith("Error") ? "No fonts available" : font}
+
+                  {id === 0 && !font.startsWith("Error") && "primary"}
                 </div>
-              ))}
+              )
+              }
             </div>
           </div>
 
