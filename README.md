@@ -63,7 +63,7 @@ We saw how creative teams and solo founders struggle to build consistent brandin
 
 ## 📸 Screenshots
 
-All images are in the `demopictures/` folder of this repo.
+All images are in the `demo-pictures/` folder of this repo.
 
 ### 1. Creating a brand manually
 ![Creating a brand manually](demo-pictures\Creating_a_brand_manually.jpeg)
@@ -72,35 +72,28 @@ All images are in the `demopictures/` folder of this repo.
 ![Extract DNA From picture](demo-pictures\Extract_DNA_From_picture.jpeg)
 
 ### 3. Extract
-![Extract](demopictures/Extract.jpeg)
+![Extract](demo-pictures/Extract.jpeg)
 
 ### 4. Extracted Brand DNA
-![Extracted Brand DNA](demopictures/Extracted_Brand_DNA.jpeg)
+![Extracted Brand DNA](demo-pictures/Extracted_Brand_DNA.jpeg)
 
 ### 5. Login/Signup
-![Login/Signup](demopictures/Login_signup.jpeg)
+![Login/Signup](demo-pictures/Login_signup.jpeg)
 
 ### 6. Manually created Brand
-![Manually created Brand](demopictures/Manually_created_Brand.jpeg)
+![Manually created Brand](demo-pictures/Manually_created_Brand.jpeg)
 
 ### 7. Preview of extract (need to login)
-![Preview of extract (need to login)](demopictures/Preview_of_extract_(need_to_login).jpeg)
+![Preview of extract (need to login)](demo-pictures/Preview_of_extract_(need_to_login).jpeg)
 
 ### 8. Recommended colors (co-pilot reference from video)
-![Recommended colors (co-pilot reference from video)](demopictures/Recommended_colors_(co-pilot_refrence_from_video).jpeg)
+![Recommended colors (co-pilot reference from video)](demo-pictures/Recommended_colors_(co-pilot_refrence_from_video).jpeg)
 
 ### 9. Saved brands
-![Saved brands](demopictures/Saved_brands.jpeg)
+![Saved brands](demo-pictures/Saved_brands.jpeg)
 
 ### 10. Suggestions page
-![Suggestions page](demopictures/Suggestions_page.jpeg)
-
----
-
-## 🔗 Try it Out
-
-- [Live Demo](#) (Coming soon)
-- [GitHub Repo](https://github.com/yourusername/brandstyleai)
+![Suggestions page](demo-pictures/Suggestions_page.jpeg)
 
 ---
 
@@ -119,4 +112,3 @@ All images are in the `demopictures/` folder of this repo.
 ## 📝 License
 
 Apache 2.0, see [LICENSE](LICENSE).
-
