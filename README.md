@@ -1,98 +1,122 @@
-Absolutely! Here’s a **detailed `README.md`** for your BrandstyleAI project, following open-source and hackathon best practices, with **10 placeholder image sections** for demos, diagrams, or branding shots.
-You can easily replace the image URLs with your actual assets or drag & drop in your repo/platform UI.
-
----
-
 # BrandstyleAI
 
-**BrandstyleAI** is your AI-powered branding copilot for Adobe Express. Instantly extract a brand’s visual DNA from images, logos, or web URLs, and apply consistent styles to any document with one click. Powered by advanced machine learning, modern web scraping, and deep Adobe Express integration, BrandstyleAI automates tedious design tasks and helps you create stunning, on-brand content—fast.
+BrandstyleAI is an AI-powered design assistant that brings instant, consistent branding to everyone in Adobe Express. Upload a logo, screenshot, or website URL—BrandstyleAI extracts your brand’s DNA (colors, fonts, logos, style cues) and applies it across documents in a single click. Fast, private, and future-ready.
 
 ---
 
-![BrandstyleAI Demo Banner](https://placehold.co/1200x400?text=BrandstyleAI+Banner)
+## 🚀 Inspiration
 
-## 🚀 Features
-
-* **Brand DNA Extraction:** Instantly pull colors, fonts, and logos from any uploaded asset or website.
-* **Auto-Brandify:** Apply your extracted brand style to Adobe Express documents—backgrounds, fonts, layouts, and more.
-* **Live Preview:** See how your brand will look in real time before applying it.
-* **Multi-Format Support:** Works with images, PDFs, websites, and most major document types.
-* **Accessible & Explainable:** Get plain-language explanations for color choices, font pairings, and more.
-* **Generative Design:** (Coming soon!) Instantly generate presentations, social posts, and more in your brand style via natural language prompts.
-* **Multi-Platform Integration:** Publish and sync brand assets across your favorite CMS and social channels.
+We saw how creative teams and solo founders struggle to build consistent branding across docs, decks, and campaigns. Manual extraction of colors, fonts, and styles is slow and error-prone. We set out to automate the boring parts, so creators can focus on vision, not formatting.
 
 ---
 
-## 📷 Screenshots & Demos
+## 🧠 What it does
 
-> Replace these URLs with real assets or keep as placeholders for your submission.
-> Each image is 800x500 for optimal viewing; update dimensions as needed.
-
-1. **Home Screen**
-   ![Home Screen](https://placehold.co/800x500?text=Home+Screen)
-2. **Brand DNA Extraction Flow**
-   ![Extraction Flow](https://placehold.co/800x500?text=Extraction+Flow)
-3. **Live Brand Preview**
-   ![Live Preview](https://placehold.co/800x500?text=Live+Preview)
-4. **Brandify Button in Action**
-   ![Brandify Button](https://placehold.co/800x500?text=Brandify+Button)
-5. **Document After Brandification**
-   ![Branded Document](https://placehold.co/800x500?text=Branded+Document)
-6. **Logo Detection Example**
-   ![Logo Detection](https://placehold.co/800x500?text=Logo+Detection)
-7. **Color Palette Extraction**
-   ![Color Extraction](https://placehold.co/800x500?text=Color+Palette)
-8. **Font Detection Panel**
-   ![Font Detection](https://placehold.co/800x500?text=Font+Detection)
-9. **Explainable AI Popup**
-   ![Explainable AI](https://placehold.co/800x500?text=Explainable+AI)
-10. **Multi-Platform Export**
-    ![Multi-Platform](https://placehold.co/800x500?text=Multi-Platform+Export)
+- Extracts colors, fonts, and logo from images, PDFs, and URLs using deep learning, web scraping, and clustering.
+- Uses Gemini API (RAG) for advanced style and font inference from web sources and noisy screenshots.
+- Provides live “brand DNA” preview and lets users manually refine or save their brand.
+- Brandifies any Adobe Express document with your extracted brand (via Document API).
+- Offers quick “one-click” branding for PDFs, Word, and PowerPoint files.
+- All processing happens in-browser or via secure FastAPI backend—privacy by default.
+- Stores your brands, suggestions, and history in Supabase for instant reuse.
+- (MVP) Recommends color palettes using k-means clustering and Gemini-powered Copilot prompts.
 
 ---
 
-## ✨ Inspiration
+## 🛠️ How we built it
 
-We wanted to remove the pain of manual branding, make professional design accessible, and help creators stay on-brand—no matter their skill level. Inspired by GitHub Copilot, our vision is an AI partner for design and branding, not just code.
+- **Frontend:** React, JavaScript, Adobe Spectrum Web Components, Express Add-ons SDK.
+- **Backend:** FastAPI for extraction endpoints, Selenium for web scraping, Supabase for authentication/brand storage.
+- **AI & ML:** Gemini API (RAG) for intelligent font/style retrieval, k-means for color palette extraction.
+- **Automation:** Selenium scripts crawl websites to fetch logos, color cues, and font files.
+- **Integration:** Adobe Express Document API for real-time document styling.
 
 ---
 
-## 🧑‍💻 How It Works
+## 🏆 Accomplishments
 
-* **Upload or Paste:** Start with any image, logo, or website URL.
-* **ML-Powered Extraction:** The app uses computer vision, K-Means clustering, and Google Gemini API to pull brand colors, fonts, and logos.
-* **Preview & Brandify:** Instantly preview your brand style. Click “Brandify” to apply it to your current Adobe Express document.
-* **Deep Integration:** Works directly within Adobe Express via Document API and Add-ons SDK, updating documents in real time.
+- Extracts usable brand DNA from nearly any input (even complex homepages or noisy images).
+- Seamless “Brandify” workflow in Adobe Express.
+- Real-time privacy: no files are stored or processed server-side unless needed for extraction.
+- Copilot-style recommendations and live brand previews.
+
+---
+
+## 💡 What we learned
+
+- How to push FastAPI and Selenium for robust, resilient web scraping.
+- Integrating Gemini RAG and k-means for real-world creative tasks.
+- Mastered Adobe Express’s new Document API and SDK.
+- Built a fully cloudless, privacy-first design workflow.
+
+---
+
+## 🚦 What's next for BrandstyleAI
+
+- **Video branding:** Instantly generate branded intros/outros for videos, reels, and stories.
+- **Copilot expansion:** Smart, chat-driven brand suggestions, on-brand content rewrites, and full “create from description” flows.
+- **Real-time feedback:** Copilot advises on color, accessibility, and logo usage as you work.
+- **Team collaboration:** Share brand DNA across teams; manage multiple brands.
+- **More formats:** Export branded assets to even more formats and integrations.
+
+---
+
+## 📸 Screenshots
+
+All images are in the `demopictures/` folder of this repo.
+
+### 1. Creating a brand manually
+![Creating a brand manually](demopictures/Creating%20a%20brand%20manually.jpeg)
+
+### 2. Extract DNA From picture
+![Extract DNA From picture](demopictures/Extract%20DNA%20From%20picture.jpeg)
+
+### 3. Extract
+![Extract](demopictures/Extract.jpeg)
+
+### 4. Extracted Brand DNA
+![Extracted Brand DNA](demopictures/Extracted%20Brand%20DNA.jpeg)
+
+### 5. Login/Signup
+![Login/Signup](demopictures/Login_signup.jpeg)
+
+### 6. Manually created Brand
+![Manually created Brand](demopictures/Manually%20created%20Brand.jpeg)
+
+### 7. Preview of extract (need to login)
+![Preview of extract (need to login)](demopictures/Preview%20of%20extract%20%28need%20to%20login%29.jpeg)
+
+### 8. Recommended colors (co-pilot reference from video)
+![Recommended colors (co-pilot reference from video)](demopictures/Recommended%20colors%20%28co-pilot%20refrence%20from%20video%29.jpeg)
+
+### 9. Saved brands
+![Saved brands](demopictures/Saved%20brands.jpeg)
+
+### 10. Suggestions page
+![Suggestions page](demopictures/Suggestions%20page.jpeg)
+
+---
+
+## 🔗 Try it Out
+
+- [Live Demo](#) (Coming soon)
+- [GitHub Repo](https://github.com/yourusername/brandstyleai)
 
 ---
 
 ## 🛠️ Built With
 
-* **Frontend:** React, Spectrum Web Components, Adobe Express Add-ons SDK
-* **Backend (optional):** FastAPI, Python
-* **AI/ML:** TensorFlow, Gemini API (Google), KMeans Clustering for color palettes
-* **Web Scraping:** Custom Node.js utilities for font & color detection
-* **Adobe Integration:** Document Model Sandbox, Communication API, Document API
-* **Deployment:** Node.js, Express, Vercel/Netlify
+- **FastAPI** (backend, API)
+- **Adobe Express SDK** (Document API)
+- **K-means Clustering** (palette extraction)
+- **Selenium** (web scraping)
+- **React + JavaScript** (frontend)
+- **Supabase** (auth, storage)
+- **Gemini API (RAG)** (font/style retrieval, AI suggestions)
 
 ---
 
+## 📝 License
 
-
-## 📚 Documentation
-
-See [`/docs`](./docs/) for:
-
-* API Reference
-* Add-on Manifest Example
-* Adobe Express Integration Tips
-* Troubleshooting
-
----
-
-## 🧠 What We Learned
-
-We learned how to blend AI, design, and real-world user needs. Integrating with Adobe Express’s sandbox was a deep dive into new APIs, and making ML explainable was both challenging and rewarding.
-
-
+Apache 2.0, see [LICENSE](LICENSE).
 
