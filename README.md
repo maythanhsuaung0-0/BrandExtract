@@ -66,34 +66,34 @@ We saw how creative teams and solo founders struggle to build consistent brandin
 All images are in the `demopictures/` folder of this repo.
 
 ### 1. Creating a brand manually
-![Creating a brand manually](demopictures/Creating%20a%20brand%20manually.jpeg)
+![Creating a brand manually](demo-pictures\Creating_a_brand_manually.jpeg)
 
 ### 2. Extract DNA From picture
-![Extract DNA From picture](demopictures/Extract%20DNA%20From%20picture.jpeg)
+![Extract DNA From picture](demo-pictures\Extract_DNA_From_picture.jpeg)
 
 ### 3. Extract
 ![Extract](demopictures/Extract.jpeg)
 
 ### 4. Extracted Brand DNA
-![Extracted Brand DNA](demopictures/Extracted%20Brand%20DNA.jpeg)
+![Extracted Brand DNA](demopictures/Extracted_Brand_DNA.jpeg)
 
 ### 5. Login/Signup
 ![Login/Signup](demopictures/Login_signup.jpeg)
 
 ### 6. Manually created Brand
-![Manually created Brand](demopictures/Manually%20created%20Brand.jpeg)
+![Manually created Brand](demopictures/Manually_created_Brand.jpeg)
 
 ### 7. Preview of extract (need to login)
-![Preview of extract (need to login)](demopictures/Preview%20of%20extract%20%28need%20to%20login%29.jpeg)
+![Preview of extract (need to login)](demopictures/Preview_of_extract_(need_to_login).jpeg)
 
 ### 8. Recommended colors (co-pilot reference from video)
-![Recommended colors (co-pilot reference from video)](demopictures/Recommended%20colors%20%28co-pilot%20refrence%20from%20video%29.jpeg)
+![Recommended colors (co-pilot reference from video)](demopictures/Recommended_colors_(co-pilot_refrence_from_video).jpeg)
 
 ### 9. Saved brands
-![Saved brands](demopictures/Saved%20brands.jpeg)
+![Saved brands](demopictures/Saved_brands.jpeg)
 
 ### 10. Suggestions page
-![Suggestions page](demopictures/Suggestions%20page.jpeg)
+![Suggestions page](demopictures/Suggestions_page.jpeg)
 
 ---
 
