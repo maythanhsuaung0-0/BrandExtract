@@ -66,10 +66,10 @@ We saw how creative teams and solo founders struggle to build consistent brandin
 All images are in the `demo-pictures/` folder of this repo.
 
 ### 1. Creating a brand manually
-![Creating a brand manually](demo-pictures\Creating_a_brand_manually.jpeg)
+![Creating a brand manually](demo-pictures/Creating_a_brand_manually.jpeg)
 
 ### 2. Extract DNA From picture
-![Extract DNA From picture](demo-pictures\Extract_DNA_From_picture.jpeg)
+![Extract DNA From picture](demo-pictures/Extract_DNA_From_picture.jpeg)
 
 ### 3. Extract
 ![Extract](demo-pictures/Extract.jpeg)
