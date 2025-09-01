@@ -1,4 +1,4 @@
-# BrandstyleAI
+# BrandstyleAI ( Adobe Hackathon ) 
 
 BrandstyleAI is an AI-powered design assistant that brings instant, consistent branding to everyone in Adobe Express. Upload a logo, screenshot, or website URL—BrandstyleAI extracts your brand’s DNA (colors, fonts, logos, style cues) and applies it across documents in a single click. Fast, private, and future-ready.
 
